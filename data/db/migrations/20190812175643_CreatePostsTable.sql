@@ -3,7 +3,7 @@
 -- SQL in section 'Up' is executed when this migration is applied
 create table posts (
   id              serial primary key,
-  title           varchar(255),
+  title           varchar(255)
 );
 
 
