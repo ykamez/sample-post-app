@@ -1,0 +1,12 @@
+
+test:
+    driver: postgres
+    open: dbname=sample_post_app sslmode=disable
+
+development:
+    driver: postgres
+    open: dbname=sample_post_app sslmode=disable
+
+production:
+    driver: postgres
+    open: dbname=sample_post_app sslmode=verify-full

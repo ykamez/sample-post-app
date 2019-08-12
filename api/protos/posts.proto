@@ -1,0 +1,39 @@
+syntax = "proto3";
+
+package com.github.sample_post_app;
+
+option go_package = "github.com/ykamez/sample-post-app/api;api_pb";
+
+
+import "google/api/annotations.proto";
+
+service PostService {
+  rpc CreatePost(CreatePostsRequest) returns (Post) {
+    option (google.api.http) = {
+      post: "/posts"
+      body: "post"
+    };
+  }
+  rpc ListPosts(ListPostsRequest) returns (ListPostsResponse) {
+    option (google.api.http) = {
+      get: "/posts"
+    };
+  }
+}
+
+message Post {
+  uint32 id = 1;
+  string title = 2;
+}
+
+
+message CreatePostsRequest {
+  Post post = 1;
+}
+
+message ListPostsRequest {
+}
+
+message ListPostsResponse {
+  repeated Post posts = 1;
+}
