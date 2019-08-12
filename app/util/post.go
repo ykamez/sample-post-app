@@ -9,7 +9,7 @@ import (
 
 // PostsToPb converts post objects to pb objects.
 func PostsToPb(ctx context.Context, posts []*record.Post) []*api_pb.Post {
-	pbs := make([]*api_pb.Post, 0, len(posts))
+	pbs := make([]*api_pb.Post, len(posts))
 	for i, m := range posts {
 		pbs[i] = PostToPb(ctx, m)
 	}
