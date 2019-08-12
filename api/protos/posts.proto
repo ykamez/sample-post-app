@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+package com.github.sample_post_app;
+
+option go_package = "github.com/ykamez/sample-post-app/api;api_pb";
+
+
+import "google/api/annotations.proto";
+
+service PostService {
+}
