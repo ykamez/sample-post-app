@@ -7,6 +7,7 @@ import (
 	"github.com/izumin5210/grapi/pkg/grapiserver"
 
 	api_pb "github.com/ykamez/sample-post-app/api"
+	"github.com/ykamez/sample-post-app/infra/store"
 )
 
 // PostServiceServer is a composite interface of api_pb.PostServiceServer and grapiserver.Server.
@@ -16,11 +17,19 @@ type PostServiceServer interface {
 }
 
 // NewPostServiceServer creates a new PostServiceServer instance.
-func NewPostServiceServer() PostServiceServer {
-	return &postServiceServerImpl{}
+func NewPostServiceServer(
+	store store.PostStore,
+) interface {
+	api_pb.PostServiceServer
+	grapiserver.Server
+} {
+	return &postServiceServerImpl{
+		store: store,
+	}
 }
 
 type postServiceServerImpl struct {
+	store store.PostStore
 }
 
 func (s *postServiceServerImpl) ListPosts(ctx context.Context, req *api_pb.ListPostsRequest) (*api_pb.ListPostsResponse, error) {
