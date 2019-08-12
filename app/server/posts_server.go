@@ -46,7 +46,7 @@ func (s *postServiceServerImpl) ListPosts(ctx context.Context, req *api_pb.ListP
 func (s *postServiceServerImpl) CreatePost(ctx context.Context, req *api_pb.CreatePostsRequest) (*api_pb.Post, error) {
 
 	fmt.Println("CreatePost called")
-	post, err := s.store.Create(ctx)
+	// post, err := s.store.Create(ctx)
 	resp := &api_pb.Post{
 		// Posts: util.PostsToPb(subs, userSubs, appMeta.Language),
 	}
