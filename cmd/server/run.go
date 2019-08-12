@@ -4,6 +4,7 @@ import (
 	"context"
 
 	"github.com/izumin5210/grapi/pkg/grapiserver"
+	"github.com/ykamez/sample-post-app/app/server"
 )
 
 func run() error {
@@ -13,7 +14,7 @@ func run() error {
 	s := grapiserver.New(
 		grapiserver.WithDefaultLogger(),
 		grapiserver.WithServers(
-		// TODO
+			server.NewPostServiceServer(),
 		),
 	)
 	return s.ServeContext(ctx)
