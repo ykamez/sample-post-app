@@ -15,17 +15,15 @@ type AppComponent interface {
 
 // CreateAppComponent initializes a new AppComponent instnace.
 func CreateAppComponent() (AppComponent, error) {
-	db, err := sql.Open("sample_post_app", c.DatabaseURL)
+	db, err := sql.Open("sample_post_app", "postgres://postgres:@localhost/sample_post_app?sslmode=disable")
 	if err != nil {
 		return nil, fail.Wrap(err)
 	}
 	db.SetMaxIdleConns(40)
 	db.SetMaxOpenConns(40)
-	db.SetConnMaxLifetime(10m)
 
 	return &appComponentImpl{
-		config: c,
-		DB:     db,
+		DB: db,
 	}, nil
 }
 

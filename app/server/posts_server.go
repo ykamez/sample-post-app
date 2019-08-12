@@ -5,8 +5,10 @@ import (
 	"fmt"
 
 	"github.com/izumin5210/grapi/pkg/grapiserver"
+	"github.com/srvc/fail"
 
 	api_pb "github.com/ykamez/sample-post-app/api"
+	"github.com/ykamez/sample-post-app/app/util"
 	"github.com/ykamez/sample-post-app/infra/store"
 )
 
@@ -35,8 +37,10 @@ type postServiceServerImpl struct {
 func (s *postServiceServerImpl) ListPosts(ctx context.Context, req *api_pb.ListPostsRequest) (*api_pb.ListPostsResponse, error) {
 	fmt.Println("ListPost called")
 	posts, err := s.store.GetPosts(ctx)
+	if err != nil {
+		return nil, fail.Wrap(err)
+	}
 	resp := &api_pb.ListPostsResponse{
-		// postsをpbに変換するutilを準備する
 		Posts: util.PostsToPb(ctx, posts),
 	}
 
