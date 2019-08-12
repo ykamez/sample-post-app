@@ -4,6 +4,7 @@ import (
 	"context"
 	"database/sql"
 
+	"github.com/srvc/fail"
 	"github.com/volatiletech/sqlboiler/queries/qm"
 	"github.com/ykamez/sample-post-app/infra/record"
 	"github.com/ykamez/sample-post-app/infra/store"
@@ -19,7 +20,7 @@ type postStoreImpl struct {
 }
 
 func (s *postStoreImpl) GetPosts(ctx context.Context) ([]*record.Post, error) {
-	posts, err := record.Posts(qm.All(ctx, s.db))
+	posts, err := record.Posts(qm.Where("id IN (1,2,3,4,5)")).All(ctx, s.db)
 	if err != nil {
 		return nil, fail.Wrap(err)
 	}
