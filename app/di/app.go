@@ -2,7 +2,9 @@ package di
 
 import (
 	"database/sql"
+	"fmt"
 
+	_ "github.com/lib/pq"
 	"github.com/srvc/fail"
 	"github.com/ykamez/sample-post-app/infra/store"
 	"github.com/ykamez/sample-post-app/infra/store/rdb"
@@ -15,7 +17,9 @@ type AppComponent interface {
 
 // CreateAppComponent initializes a new AppComponent instnace.
 func CreateAppComponent() (AppComponent, error) {
-	db, err := sql.Open("sample_post_app", "postgres://postgres:@localhost/sample_post_app?sslmode=disable")
+	psqlInfo := fmt.Sprintf("host=%s port=%d  dbname=%s sslmode=disable",
+		"localhost", 5432, "sample_post_app")
+	db, err := sql.Open("postgres", psqlInfo)
 	if err != nil {
 		return nil, fail.Wrap(err)
 	}
